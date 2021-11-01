@@ -1,4 +1,4 @@
-name: Clamav Docker Image CI
+name: DuckyPanel Docker Image CI
 
 on: 
   push:
