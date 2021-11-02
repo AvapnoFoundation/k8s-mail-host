@@ -11,6 +11,7 @@ on:
       - 'main'
     paths:
       - 'docker-files/wildduck'
+  workflow_dispatch:
 
 jobs:
   docker:

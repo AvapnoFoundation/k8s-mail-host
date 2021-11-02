@@ -11,6 +11,7 @@ on:
       - 'main'
     paths:
       - 'docker-files/zone-mta'
+  workflow_dispatch:
 
 jobs:
   docker:

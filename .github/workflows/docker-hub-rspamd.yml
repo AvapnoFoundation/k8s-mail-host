@@ -11,6 +11,7 @@ on:
       - 'main'
     paths:
       - 'docker-files/rspamd'
+  workflow_dispatch:
 
 jobs:
   docker:

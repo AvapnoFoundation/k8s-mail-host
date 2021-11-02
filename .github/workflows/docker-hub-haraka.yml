@@ -11,6 +11,7 @@ on:
       - 'main'
     paths:
       - 'docker-files/haraka'
+  workflow_dispatch:
 
 jobs:
   docker:
