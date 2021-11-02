@@ -7,7 +7,7 @@ WORKDIR /app
 RUN git clone --depth 1 https://github.com/AvapnoHelpingHand/DuckyAPI.git ./
 RUN npm install --production
 RUN npm uninstall duckypanel
-RUN npm install @angular/compiler-cli
+RUN npm install @angular/compiler-cli@^10
 RUN npm install --production https://github.com/AvapnoHelpingHand/DuckyPanel.git
 RUN npm run clean --production
 RUN npm run build --production
