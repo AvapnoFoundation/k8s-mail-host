@@ -5,12 +5,12 @@ on:
     branches:
       - 'main'
     paths:
-      - 'docker-images/haraka'
+      - 'docker-files/haraka'
   pull_request:
     branches:
       - 'main'
     paths:
-      - 'docker-images/haraka'
+      - 'docker-files/haraka'
 
 jobs:
   docker:
@@ -34,4 +34,5 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
+          file: docker-files/haraka
           tags: ahhf/haraka:k8s-mail-host

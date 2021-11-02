@@ -5,12 +5,12 @@ on:
     branches:
       - 'main'
     paths:
-      - 'docker-images/rspamd'
+      - 'docker-files/rspamd'
   pull_request:
     branches:
       - 'main'
     paths:
-      - 'docker-images/rspamd'
+      - 'docker-files/rspamd'
 
 jobs:
   docker:
@@ -34,4 +34,5 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
+          file: docker-files/rspamd
           tags: ahhf/rspamd:k8s-mail-host

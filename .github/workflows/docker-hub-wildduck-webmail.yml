@@ -5,12 +5,12 @@ on:
     branches:
       - 'main'
     paths:
-      - 'docker-images/wildduck-webmail'
+      - 'docker-files/wildduck-webmail'
   pull_request:
     branches:
       - 'main'
     paths:
-      - 'docker-images/wildduck-webmail'
+      - 'docker-files/wildduck-webmail'
 
 jobs:
   docker:
@@ -34,4 +34,5 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
+          file: docker-files/wildduck-webmail
           tags: ahhf/wildduck-webmail:k8s-mail-host

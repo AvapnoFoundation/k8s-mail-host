@@ -5,12 +5,12 @@ on:
     branches:
       - 'main'
     paths:
-      - 'docker-images/ducky-panel'
+      - 'docker-files/ducky-panel'
   pull_request:
     branches:
       - 'main'
     paths:
-      - 'docker-images/ducky-panel'
+      - 'docker-files/ducky-panel'
 
 jobs:
   docker:
@@ -34,4 +34,5 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
+          file: docker-files/ducky-panel
           tags: ahhf/ducky-panel:k8s-mail-host

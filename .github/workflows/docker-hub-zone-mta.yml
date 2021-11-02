@@ -5,12 +5,12 @@ on:
     branches:
       - 'main'
     paths:
-      - 'docker-images/zone-mta'
+      - 'docker-files/zone-mta'
   pull_request:
     branches:
       - 'main'
     paths:
-      - 'docker-images/zone-mta'
+      - 'docker-files/zone-mta'
 
 jobs:
   docker:
@@ -34,4 +34,5 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
+          file: docker-files/zone-mta
           tags: ahhf/zone-mta:k8s-mail-host
