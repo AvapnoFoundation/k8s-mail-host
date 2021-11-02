@@ -1,6 +1,6 @@
 FROM node:lts-alpine as builder
 
-RUN apk add --no-cache git python make g++
+RUN apk add --no-cache git make g++
 
 WORKDIR /app
 
