@@ -18,6 +18,8 @@ HEALTHCHECK CMD "clamdcheck.sh"
 
 WORKDIR /src
 
+RUN apk add --no-cache git
+
 RUN git clone --depth 1 https://github.com/AvapnoHelpingHand/clamav.git ./ --branch rel/${version}
 
 # hadolint ignore=DL3008  We want the latest stable versions
