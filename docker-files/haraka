@@ -2,7 +2,7 @@ FROM node:lts-alpine as builder
 
 ARG version=2.8.28
 
-RUN apk add --no-cache  git python make g++
+RUN apk add --no-cache git python3 make g++
 
 WORKDIR /app
 
