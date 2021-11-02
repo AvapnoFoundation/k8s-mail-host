@@ -109,7 +109,7 @@ RUN apk add --no-cache \
     install -d -m 755 -g "clamav" -o "clamav" "/var/log/clamav"
 
 COPY --from=builder "/clamav" "/"
-COPY "./dockerfiles/clamdcheck.sh" "/usr/local/bin/"
-COPY "./dockerfiles/docker-entrypoint.sh" "/init"
+COPY --from=builder  "/src/dockerfiles/clamdcheck.sh" "/usr/local/bin/"
+COPY --from=builder  "/src/dockerfiles/docker-entrypoint.sh" "/init"
 
 ENTRYPOINT ["/sbin/tini", "--", "init"]
