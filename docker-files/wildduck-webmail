@@ -1,6 +1,7 @@
 FROM node:lts-alpine as builder
 
-ARG version=1.0.0
+#ARG version=1.0.0
+ARG version=master
 
 RUN apk add --no-cache git python3 make g++
 
