@@ -8,7 +8,9 @@ WORKDIR /app
 
 #RUN git clone --depth 1 https://github.com/AvapnoHelpingHand/wildduck-webmail.git ./ --branch v${version}
 RUN git clone --depth 1 https://github.com/AvapnoHelpingHand/wildduck-webmail.git ./ --branch master
+RUN npm install -g bower
 RUN npm install --production && npm run bowerdeps
+RUN npm uninstall bower
 
 
 FROM node:lts-alpine as app
