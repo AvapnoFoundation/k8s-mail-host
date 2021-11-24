@@ -17,6 +17,6 @@ ENV NODE_ENV production
 RUN apk add --no-cache tini
 
 WORKDIR /haraka
-COPY --from=builder /app /app
+COPY --from=builder /haraka /haraka
 
 ENTRYPOINT ["/sbin/tini", "--", "node", "haraka.js"]
