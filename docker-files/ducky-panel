@@ -20,6 +20,6 @@ ENV NODE_ENV production
 RUN apk add --no-cache tini
 
 WORKDIR /ducky-panel
-COPY --from=builder /app /app
+COPY --from=builder /ducky-panel /ducky-panel
 
 ENTRYPOINT ["/sbin/tini", "--", "npm", "run", "buildstart"]
