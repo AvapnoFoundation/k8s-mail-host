@@ -4,7 +4,7 @@ ARG version=2.8.19
 
 RUN apk add --no-cache git python2 make g++
 
-WORKDIR /app
+WORKDIR /haraka
 
 RUN git clone --depth 1 https://github.com/AvapnoHelpingHand/Haraka.git ./ --branch v${version}
 RUN npm install --production
@@ -16,7 +16,7 @@ ENV NODE_ENV production
 
 RUN apk add --no-cache tini
 
-WORKDIR /app
+WORKDIR /haraka
 COPY --from=builder /app /app
 
 ENTRYPOINT ["/sbin/tini", "--", "node", "haraka.js"]

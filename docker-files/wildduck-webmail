@@ -4,7 +4,7 @@ FROM node:lts-alpine as builder
 
 RUN apk add --no-cache git python3 make g++
 
-WORKDIR /app
+WORKDIR /wildduck-webmail
 
 #RUN git clone --depth 1 https://github.com/AvapnoHelpingHand/wildduck-webmail.git ./ --branch v${version}
 RUN git clone --depth 1 https://github.com/AvapnoHelpingHand/wildduck-webmail.git ./ --branch master
@@ -19,8 +19,7 @@ ENV NODE_ENV production
 
 RUN apk add --no-cache tini
 
-WORKDIR /app
-COPY --from=builder /app /app
+WORKDIR /wildduck-webmail
+COPY --from=builder /wildduck-webmail /wildduck-webmail
 
 ENTRYPOINT ["/sbin/tini", "--", "node", "server.js"]
-CMD ["--config=config/www.toml"]

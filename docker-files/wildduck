@@ -4,7 +4,7 @@ ARG version=1.36.0
 
 RUN apk add --no-cache git python3 make g++
 
-WORKDIR /app
+WORKDIR /wildduck
 
 RUN git clone --depth 1 https://github.com/AvapnoHelpingHand/wildduck.git ./ --branch v${version}
 RUN npm install --production
@@ -16,8 +16,7 @@ ENV NODE_ENV production
 
 RUN apk add --no-cache tini
 
-WORKDIR /app
-COPY --from=builder /app /app
+WORKDIR /wildduck
+COPY --from=builder /wildduck /wildduck
 
 ENTRYPOINT ["/sbin/tini", "--", "node", "server.js"]
-CMD ["--config=config/default.toml"]

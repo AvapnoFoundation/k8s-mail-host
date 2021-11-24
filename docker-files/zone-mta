@@ -4,7 +4,7 @@ ARG version=2.4.2
 
 RUN apk add --no-cache git python3 make g++
 
-WORKDIR /app
+WORKDIR /zone-mta
 
 RUN git clone --depth 1 https://github.com/AvapnoHelpingHand/zone-mta ./
 
@@ -17,8 +17,8 @@ ENV NODE_ENV production
 
 RUN apk add --no-cache tini
 
-WORKDIR /app
-COPY --from=builder /app /app
+WORKDIR /zone-mta
+COPY --from=builder /zone-mta /zone-mta
 
 ENTRYPOINT ["/sbin/tini", "--", "node", "app.js"]
 CMD ["--config=config/zonemta.toml"]

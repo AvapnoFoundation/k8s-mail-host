@@ -2,7 +2,7 @@ FROM node:lts-alpine as builder
 
 RUN apk add --no-cache git python3 make g++
 
-WORKDIR /app
+WORKDIR /ducky-panel
 
 RUN git clone --depth 1 https://github.com/AvapnoHelpingHand/DuckyAPI.git ./
 RUN npm install --production
@@ -19,7 +19,7 @@ ENV NODE_ENV production
 
 RUN apk add --no-cache tini
 
-WORKDIR /app
+WORKDIR /ducky-panel
 COPY --from=builder /app /app
 
-ENTRYPOINT ["/sbin/tini", "--", "node", "dist/main.js"]
+ENTRYPOINT ["/sbin/tini", "--", "npm", "run", "buildstart"]
