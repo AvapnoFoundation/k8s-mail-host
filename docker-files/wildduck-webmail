@@ -6,8 +6,8 @@ RUN apk add --no-cache git python3 make g++
 
 WORKDIR /wildduck-webmail
 
-#RUN git clone --depth 1 https://github.com/AvapnoHelpingHand/wildduck-webmail.git ./ --branch v${version}
-RUN git clone --depth 1 https://github.com/AvapnoHelpingHand/wildduck-webmail.git ./ --branch master
+#RUN git clone --depth 1 --branch v${version} https://github.com/AvapnoHelpingHand/wildduck-webmail.git ./
+RUN git clone --depth 1 --branch master https://github.com/AvapnoHelpingHand/wildduck-webmail.git ./
 RUN npm install -g bower
 RUN npm install --production && npm run bowerdeps
 RUN npm uninstall bower
