@@ -1,4 +1,4 @@
-FROM node:lts-alpine as builder
+FROM node:12-alpine3.14 as builder
 
 RUN apk add --no-cache git python3 make g++
 
@@ -7,13 +7,17 @@ WORKDIR /ducky-panel
 RUN git clone --depth 1 https://github.com/AvapnoHelpingHand/DuckyAPI.git ./
 RUN npm install --production
 RUN npm uninstall duckypanel
-RUN npm install @angular/compiler-cli@^10
-RUN npm install --production https://github.com/AvapnoHelpingHand/DuckyPanel.git
+RUN git clone --depth 1 https://github.com/AvapnoHelpingHand/DuckyPanel.git ./ducky-panel
+RUN cd ./ducky-panel
+RUN npm install --production
+RUN npm run build --production
+RUN cd ..
+RUN npm install --production ducky-panel/dist
 RUN npm run clean --production
 RUN npm run build --production
 
 
-FROM node:lts-alpine as app
+FROM node:12-alpine3.14 as app
 
 ENV NODE_ENV production
 

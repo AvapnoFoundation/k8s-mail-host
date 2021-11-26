@@ -1,4 +1,4 @@
-FROM node:lts-alpine as builder
+FROM node:12-alpine3.14 as builder
 
 ARG version=1.36.0
 
@@ -10,7 +10,7 @@ RUN git clone --depth 1 https://github.com/AvapnoHelpingHand/wildduck.git ./ --b
 RUN npm install --production
 
 
-FROM node:lts-alpine as app
+FROM node:12-alpine3.14 as app
 
 ENV NODE_ENV production
 
