@@ -11,7 +11,9 @@ RUN git clone --depth 1 https://github.com/AvapnoHelpingHand/DuckyPanel.git ./du
 RUN cd ./ducky-panel
 RUN npm install --production
 RUN npm run build --production
-RUN cd ..
+RUN cd dist
+RUN npm install --production
+RUN cd ../..
 RUN npm install --production ducky-panel/dist
 RUN npm run clean --production
 RUN npm run build --production
