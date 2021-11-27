@@ -8,16 +8,17 @@ RUN git clone --depth 1 --branch master https://github.com/AvapnoHelpingHand/Duc
 RUN npm install --production
 
 RUN npm uninstall duckypanel
-RUN git clone --depth 1 --branch master https://github.com/AvapnoHelpingHand/DuckyPanel.git ./ducky-panel
-RUN cd ./ducky-panel
+RUN git clone --depth 1 --branch master https://github.com/AvapnoHelpingHand/DuckyPanel.git ./frontend
+RUN cd ./frontend
 RUN npm install --production
+RUN npm run postinstall
 RUN npm run build
 
 RUN cd dist
 RUN npm install --production
 
 RUN cd ../..
-RUN npm install --production ducky-panel/dist
+RUN npm install --production frontend/dist
 RUN npm run clean --production
 RUN npm run build
 
