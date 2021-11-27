@@ -11,7 +11,7 @@ RUN npm uninstall duckypanel
 RUN git clone --depth 1 --branch master https://github.com/AvapnoHelpingHand/DuckyPanel.git ./frontend
 RUN cd ./frontend && npm install && npm run postinstall && npm run build
 
-RUN npm install --production frontend/dist
+RUN npm install --production ./frontend/dist
 RUN npm run clean
 RUN npm run build
 
