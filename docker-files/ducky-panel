@@ -14,8 +14,10 @@ RUN cd ./frontend && npm install && npm run postinstall && npm run build-for-pub
 RUN ls ./frontend/dist
 RUN echo "1234abs"
 RUN find ./frontend -mindepth 1 ! -regex '^./frontend/dist\(/.*\)?' -delete
+RUN ls
+RUN ls ./frontend
 RUN ls ./frontend/dist
-RUN npm install --production ./frontend/dist/DuckyPanel
+RUN npm install --production ./frontend/dist
 RUN npm run clean
 RUN npm run build
 
