@@ -14,7 +14,7 @@ RUN cd ./frontend && npm install && npm run postinstall && npm run build-for-pub
 RUN ls ./frontend/dist
 RUN echo "1234abs"
 RUN rm -rf ./frontend/node_modules
-RUN cd ./frontend && find . -mindepth 1 ! -regex '^./frontend/dist\(/.*\)?' -delete
+RUN find ./frontend -mindepth 1 -not -regex '^./frontend/dist\(/.*\)?' -delete
 RUN ls
 RUN ls ./frontend
 RUN ls ./frontend/dist
