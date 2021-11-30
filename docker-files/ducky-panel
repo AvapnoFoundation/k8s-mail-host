@@ -11,10 +11,7 @@ RUN npm uninstall duckypanel
 RUN git clone --depth 1 --branch master https://github.com/AvapnoHelpingHand/DuckyPanel.git ./frontend
 RUN cd ./frontend && npm install && npm run postinstall && npm run build-for-publish
 
-RUN rm -rf ./frontend/node_modules
-RUN find ./frontend -mindepth 1 -not -regex '^./frontend/dist\(/.*\)?'
-RUN find ./frontend -mindepth 1 -not -regex '^./frontend/dist\(/.*\)?' -delete
-RUN ls ./frontend
+RUN find ./frontend -mindepth 1 -not -regex '^./frontend/dist\(/.*\)\?' -delete
 RUN npm install --production ./frontend/dist
 RUN npm run clean
 RUN npm run build
