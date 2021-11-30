@@ -19,4 +19,4 @@ RUN apk add --no-cache tini
 WORKDIR /wildduck
 COPY --from=builder /wildduck /wildduck
 
-ENTRYPOINT ["/sbin/tini", "--", "node", "server.js"]
+ENTRYPOINT ["tini", "--", "node", "server.js"]

@@ -11,4 +11,4 @@ EXPOSE 7357
 
 RUN freshclam --quiet
 
-ENTRYPOINT ["/sbin/tini", "--", "/bin/sh", "-c", "freshclam -d & clamd"]
+ENTRYPOINT ["tini", "--", "/bin/sh", "-c", "freshclam -d & clamd"]

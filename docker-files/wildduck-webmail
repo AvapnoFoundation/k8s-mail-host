@@ -22,4 +22,4 @@ RUN apk add --no-cache tini
 WORKDIR /wildduck-webmail
 COPY --from=builder /wildduck-webmail /wildduck-webmail
 
-ENTRYPOINT ["/sbin/tini", "--", "node", "server.js"]
+ENTRYPOINT ["tini", "--", "node", "server.js"]

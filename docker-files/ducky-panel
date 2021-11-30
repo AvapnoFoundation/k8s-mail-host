@@ -26,4 +26,4 @@ RUN apk add --no-cache tini
 WORKDIR /ducky-panel
 COPY --from=builder /ducky-panel /ducky-panel
 
-ENTRYPOINT ["/sbin/tini", "--", "npm", "run", "buildstart"]
+ENTRYPOINT ["tini", "--", "npm", "run", "buildstart"]
