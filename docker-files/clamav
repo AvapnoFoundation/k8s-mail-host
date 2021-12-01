@@ -1,8 +1,35 @@
-FROM alpine:3.14
+FROM alpine:3.14 as builder
 
-RUN apk --no-cache add tini clamav clamav-libunrar clamav-milter
+ARG version=0.104.1
 
-EXPOSE 3310
-EXPOSE 7357
+RUN git clone --depth 1 --branch clamav-${version} https://github.com/Cisco-Talos/clamav.git ./
+
+RUN apk update && apk add \
+  `# install tools` \
+  g++ gcc gdb make cmake py3-pytest python3 valgrind \
+  `# install clamav dependencies` \
+  bzip2-dev check-dev curl-dev json-c-dev libmilter-dev libxml2-dev \
+  linux-headers ncurses-dev openssl-dev pcre2-dev zlib-dev
+
+RUN mkdir build && cd build
+RUN cmake .. \
+    -D CMAKE_INSTALL_PREFIX=/clamav_build/usr \
+    -D CMAKE_INSTALL_LIBDIR=/clamav_build/lib \
+    -D APP_CONFIG_DIRECTORY=/clamav_build//etc/clamav \
+    -D DATABASE_DIRECTORY=/clamav_build//var/lib/clamav \
+    -D ENABLE_JSON_SHARED=OFF
+RUN cmake --build .
+RUN ctest
+RUN sudo cmake --build . --target install
+
+
+FROM alpine:3.14 as app
+
+COPY --from=builder /clamav_build/usr /usr
+COPY --from=builder /clamav_build/lib /lib
+COPY --from=builder /clamav_build/etc/clamav /etc/clamav
+COPY --from=builder /clamav_build/var/lib/clamav /var/lib/clamav
+
+RUN apk add --no-cache tini
 
 ENTRYPOINT ["tini", "--", "/bin/sh", "-c"]
