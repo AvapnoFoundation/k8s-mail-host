@@ -12,7 +12,7 @@ RUN apk update && apk add \
 RUN git clone --depth 1 --branch clamav-${version} https://github.com/Cisco-Talos/clamav.git /clamav_build/src
 
 RUN mkdir build && cd build
-RUN cmake .. \
+RUN cmake ../clamav_build/src \
     -D CMAKE_INSTALL_PREFIX=/clamav_build/usr \
     -D CMAKE_INSTALL_LIBDIR=/clamav_build/lib \
     -D APP_CONFIG_DIRECTORY=/clamav_build//etc/clamav \
