@@ -2,14 +2,14 @@ FROM alpine:3.14 as builder
 
 ARG version=0.104.1
 
-RUN git clone --depth 1 --branch clamav-${version} https://github.com/Cisco-Talos/clamav.git ./
-
 RUN apk update && apk add \
   `# install tools` \
   git g++ gcc gdb make cmake py3-pytest python3 valgrind \
   `# install clamav dependencies` \
   bzip2-dev check-dev curl-dev json-c-dev libmilter-dev libxml2-dev \
   linux-headers ncurses-dev openssl-dev pcre2-dev zlib-dev
+
+RUN git clone --depth 1 --branch clamav-${version} https://github.com/Cisco-Talos/clamav.git ./
 
 RUN mkdir build && cd build
 RUN cmake .. \
