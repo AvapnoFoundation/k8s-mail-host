@@ -6,7 +6,7 @@ RUN apk update && apk add \
   `# install tools` \
   git g++ gcc gdb make cmake py3-pytest python3 valgrind \
   `# install clamav dependencies` \
-  bzip2-dev check-dev curl-dev json-c-dev libmilter-dev libxml2-dev \
+  bzip2-dev check-dev curl-dev libjson-c-dev libmilter-dev libxml2-dev \
   linux-headers ncurses-dev openssl-dev pcre2-dev zlib-dev
 
 RUN git clone --depth 1 --branch clamav-${version} https://github.com/Cisco-Talos/clamav.git /clamav_build/src
