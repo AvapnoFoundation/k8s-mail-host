@@ -9,7 +9,7 @@ RUN apk update && apk add \
   bzip2-dev check-dev curl-dev json-c-dev libmilter-dev libxml2-dev \
   linux-headers ncurses-dev openssl-dev pcre2-dev zlib-dev
 
-RUN git clone --depth 1 --branch clamav-${version} https://github.com/Cisco-Talos/clamav.git ./
+RUN git clone --depth 1 --branch clamav-${version} https://github.com/Cisco-Talos/clamav.git /clamav_build/src
 
 RUN mkdir build && cd build
 RUN cmake .. \
