@@ -2,11 +2,11 @@ FROM alpine:3.14 as builder
 
 ARG version=3.1
 
-RUN apk update && apk add \
+RUN apk update && apk add --no-cache \
   `# install tools` \
   git g++ gcc gdb make cmake py3-pytest python3 valgrind \
   `# install clamav dependencies` \
-  glib2-dev libicu-dev curl-dev ragel-dev libluajit-dev \
+  libglib2.0-dev libluajit-5.1-dev icu-dev curl-dev ragel-dev \
   libsqlite3-dev libmagic-dev libhyperscan-dev \
   linux-headers openssl-dev pcre2-dev zlib-dev
 

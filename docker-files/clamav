@@ -35,6 +35,20 @@ RUN rm -r "/clamav_temp/usr/include" "/clamav_temp/usr/lib/pkgconfig/"
 
 FROM alpine:3.14 as app
 
+RUN apk add --no-cache \
+        fts \
+        json-c \
+        libbz2 \
+        libcurl \
+        libltdl \
+        libmilter \
+        libstdc++ \
+        libxml2 \
+        ncurses-libs \
+        pcre2 \
+        tini \
+        zlib
+
 COPY --from=builder /clamav_temp /
 
 RUN apk update && apk add --no-cache tini
