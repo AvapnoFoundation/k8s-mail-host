@@ -22,7 +22,7 @@ RUN mkdir build; \
         -D CMAKE_BUILD_TYPE=RelWithDebuginfo; \
     cmake --build .; \
     ctest; \
-    sudo cmake --build . --target install -- DESTDIR="/rspamd_temp"
+    cmake --build . --target install -- DESTDIR="/rspamd_temp"
 
 
 FROM alpine:3.14 as app

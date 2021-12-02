@@ -23,7 +23,7 @@ RUN mkdir build; \
       -D ENABLE_JSON_SHARED=ON; \
     cmake --build .; \
     ctest; \
-    sudo cmake --build . --target install -- DESTDIR="/clamav_temp"
+    cmake --build . --target install -- DESTDIR="/clamav_temp"
 
 
 FROM alpine:3.14 as app
