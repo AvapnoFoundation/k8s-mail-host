@@ -1,4 +1,4 @@
-FROM alpine:3.14 as builder
+FROM alpine:3.13 as builder
 
 ARG version=0.104.1
 
@@ -33,7 +33,7 @@ RUN mkdir build; \
 RUN rm -r "/clamav_temp/usr/include" "/clamav_temp/usr/lib/pkgconfig/"
 
 
-FROM alpine:3.14 as app
+FROM alpine:3.13 as app
 
 RUN apk add --no-cache \
         fts \
