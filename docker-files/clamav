@@ -9,27 +9,26 @@ RUN apk update && apk add \
   bzip2-dev check-dev curl-dev json-c-dev libmilter-dev libxml2-dev \
   linux-headers ncurses-dev openssl-dev pcre2-dev zlib-dev
 
-RUN git clone --depth 1 --branch clamav-${version} https://github.com/Cisco-Talos/clamav.git /clamav_build/src
+WORKDIR /clamav
+
+RUN git clone --depth 1 --branch clamav-${version} https://github.com/Cisco-Talos/clamav.git ./
 
 RUN mkdir build && cd build
-RUN cmake ../clamav_build/src \
-    -D CMAKE_INSTALL_PREFIX=/clamav_build/usr \
-    -D CMAKE_INSTALL_LIBDIR=/clamav_build/lib \
-    -D APP_CONFIG_DIRECTORY=/clamav_build//etc/clamav \
-    -D DATABASE_DIRECTORY=/clamav_build//var/lib/clamav \
-    -D ENABLE_JSON_SHARED=OFF
+RUN cmake .. \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_INSTALL_LIBDIR=lib \
+    -D APP_CONFIG_DIRECTORY=/etc/clamav \
+    -D DATABASE_DIRECTORY=/var/lib/clamav \
+    -D ENABLE_JSON_SHARED=ON
 RUN cmake --build .
 RUN ctest
-RUN sudo cmake --build . --target install
+RUN sudo cmake --build . --target install -- DESTDIR="/clamav_temp"
 
 
 FROM alpine:3.14 as app
 
-COPY --from=builder /clamav_build/usr /usr
-COPY --from=builder /clamav_build/lib /lib
-COPY --from=builder /clamav_build/etc/clamav /etc/clamav
-COPY --from=builder /clamav_build/var/lib/clamav /var/lib/clamav
+COPY --from=builder /clamav_temp /
 
-RUN apk add --no-cache tini
+RUN apk update && apk add --no-cache tini
 
 ENTRYPOINT ["tini", "--", "/bin/sh", "-c"]
