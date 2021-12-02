@@ -13,8 +13,7 @@ WORKDIR /clamav
 
 RUN git clone --recursive --depth 1 --branch clamav-${version} https://github.com/Cisco-Talos/clamav.git ./
 
-RUN mkdir build && cd build
-RUN cmake .. \
+RUN cmake . \
     -D CMAKE_INSTALL_PREFIX=/usr \
     -D CMAKE_INSTALL_LIBDIR=lib \
     -D APP_CONFIG_DIRECTORY=/etc/clamav \
