@@ -7,14 +7,14 @@ RUN apk update && apk add \
   git g++ gcc gdb make cmake py3-pytest python3 valgrind \
   `# install clamav dependencies` \
   glib2-dev icu-dev curl-dev ragel-dev libluajit-dev \
-  sqlite3-dev libmagic hyperscan-dev \
+  sqlite-libs sqlite3-dev libmagic hyperscan-dev \
   linux-headers openssl-dev pcre2-dev zlib-dev
 
 WORKDIR /rspamd
 
-RUN git clone --recursive --depth 1 --branch ${version} https://github.com/rspamd/rspamd.git ./
+RUN git clone --recursive --depth 1 --branch ${version} https://github.com/rspamd/rspamd.git ./src
 
-RUN cmake . \
+RUN cmake ./src \
     -D ENABLE_HYPERSCAN=ON \
     -D ENABLE_LUAJIT=ON \
     -D CMAKE_BUILD_TYPE=RelWithDebuginfo
