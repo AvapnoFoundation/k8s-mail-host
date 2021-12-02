@@ -6,7 +6,7 @@ RUN apk add --no-cache git python3 make g++
 
 WORKDIR /wildduck
 
-RUN git clone --depth 1 --branch v${version} https://github.com/AvapnoHelpingHand/wildduck.git ./
+RUN git clone --recursive --depth 1 --branch v${version} https://github.com/AvapnoHelpingHand/wildduck.git ./
 RUN npm install --production
 
 

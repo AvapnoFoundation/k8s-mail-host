@@ -6,7 +6,7 @@ RUN apk add --no-cache git python2 make g++
 
 WORKDIR /haraka
 
-RUN git clone --depth 1 --branch v${version} https://github.com/AvapnoHelpingHand/Haraka.git ./
+RUN git clone --recursive --depth 1 --branch v${version} https://github.com/AvapnoHelpingHand/Haraka.git ./
 RUN npm install --production
 
 

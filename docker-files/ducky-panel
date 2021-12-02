@@ -4,11 +4,11 @@ RUN apk add --no-cache git python3 make g++
 
 WORKDIR /ducky-panel
 
-RUN git clone --depth 1 --branch master https://github.com/AvapnoHelpingHand/DuckyAPI.git ./
+RUN git clone --recursive --depth 1 --branch master https://github.com/AvapnoHelpingHand/DuckyAPI.git ./
 RUN npm install --production
 
 RUN npm uninstall duckypanel
-RUN git clone --depth 1 --branch master https://github.com/AvapnoHelpingHand/DuckyPanel.git ./frontend
+RUN git clone --recursive --depth 1 --branch master https://github.com/AvapnoHelpingHand/DuckyPanel.git ./frontend
 RUN cd ./frontend && npm install && npm run postinstall && npm run build-for-publish
 
 RUN find ./frontend -mindepth 1 -not -regex '^./frontend/dist\(/.*\)\?' -delete

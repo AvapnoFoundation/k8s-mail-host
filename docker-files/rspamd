@@ -1,7 +1,33 @@
-FROM alpine:3.14
+FROM alpine:3.14 as builder
 
-RUN apk add --no-cache tini rspamd rspamd-controller rspamd-proxy rspamd-fuzzy ca-certificates curl
+ARG version=3.1
 
-EXPOSE 11332/tcp 11333/tcp 11334/tcp
+RUN apk update && apk add \
+  `# install tools` \
+  git g++ gcc gdb make cmake py3-pytest python3 valgrind \
+  `# install clamav dependencies` \
+  glib2-dev libicu-dev curl-dev ragel-dev libluajit-dev \
+  libsqlite3-dev libmagic-dev libhyperscan-dev \
+  linux-headers openssl-dev pcre2-dev zlib-dev
 
-ENTRYPOINT ["tini", "--", "/usr/sbin/rspamd", "-i", "-f"]
+WORKDIR /rspamd
+
+RUN git clone --recursive --depth 1 --branch ${version} https://github.com/rspamd/rspamd.git ./
+
+RUN mkdir build && cd build
+RUN cmake .. \
+    -D ENABLE_HYPERSCAN=ON \
+    -D ENABLE_LUAJIT=ON \
+    -D CMAKE_BUILD_TYPE=RelWithDebuginfo
+RUN cmake --build .
+RUN ctest
+RUN sudo cmake --build . --target install -- DESTDIR="/rspamd_temp"
+
+
+FROM alpine:3.14 as app
+
+COPY --from=builder /rspamd_temp /
+
+RUN apk update && apk add --no-cache tini
+
+ENTRYPOINT ["tini", "--", "/bin/sh", "-c"]
