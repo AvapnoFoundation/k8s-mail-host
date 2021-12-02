@@ -6,21 +6,23 @@ RUN apk update && apk add \
   `# install tools` \
   git g++ gcc gdb make cmake py3-pytest python3 valgrind \
   `# install clamav dependencies` \
-  glib2-dev icu-dev curl-dev ragel-dev libluajit-dev \
-  sqlite-libs sqlite3-dev libmagic hyperscan-dev \
+  glib2-dev libicu-dev curl-dev ragel-dev libluajit-dev \
+  libsqlite3-dev libmagic-dev libhyperscan-dev \
   linux-headers openssl-dev pcre2-dev zlib-dev
 
 WORKDIR /rspamd
 
-RUN git clone --recursive --depth 1 --branch ${version} https://github.com/rspamd/rspamd.git ./src
+RUN git clone --recursive --depth 1 --branch ${version} https://github.com/rspamd/rspamd.git ./
 
-RUN cmake ./src \
-    -D ENABLE_HYPERSCAN=ON \
-    -D ENABLE_LUAJIT=ON \
-    -D CMAKE_BUILD_TYPE=RelWithDebuginfo
-RUN cmake --build .
-RUN ctest
-RUN sudo cmake --build . --target install -- DESTDIR="/rspamd_temp"
+RUN mkdir build; \
+    cd build; \
+    cmake .. \
+        -D ENABLE_HYPERSCAN=ON \
+        -D ENABLE_LUAJIT=ON \
+        -D CMAKE_BUILD_TYPE=RelWithDebuginfo; \
+    cmake --build .; \
+    ctest; \
+    sudo cmake --build . --target install -- DESTDIR="/rspamd_temp"
 
 
 FROM alpine:3.14 as app

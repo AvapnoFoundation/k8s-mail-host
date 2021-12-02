@@ -11,17 +11,19 @@ RUN apk update && apk add \
 
 WORKDIR /clamav
 
-RUN git clone --recursive --depth 1 --branch clamav-${version} https://github.com/Cisco-Talos/clamav.git ./src
+RUN git clone --recursive --depth 1 --branch clamav-${version} https://github.com/Cisco-Talos/clamav.git ./
 
-RUN cmake ./src \
-    -D CMAKE_INSTALL_PREFIX=/usr \
-    -D CMAKE_INSTALL_LIBDIR=lib \
-    -D APP_CONFIG_DIRECTORY=/etc/clamav \
-    -D DATABASE_DIRECTORY=/var/lib/clamav \
-    -D ENABLE_JSON_SHARED=ON
-RUN cmake --build .
-RUN ctest
-RUN sudo cmake --build . --target install -- DESTDIR="/clamav_temp"
+RUN mkdir build; \
+    cd build; \
+    cmake .. \
+      -D CMAKE_INSTALL_PREFIX=/usr \
+      -D CMAKE_INSTALL_LIBDIR=lib \
+      -D APP_CONFIG_DIRECTORY=/etc/clamav \
+      -D DATABASE_DIRECTORY=/var/lib/clamav \
+      -D ENABLE_JSON_SHARED=ON; \
+    cmake --build .; \
+    ctest; \
+    sudo cmake --build . --target install -- DESTDIR="/clamav_temp"
 
 
 FROM alpine:3.14 as app
