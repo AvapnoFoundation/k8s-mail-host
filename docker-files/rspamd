@@ -6,8 +6,8 @@ RUN apk update && apk add --no-cache \
   `# install tools` \
   git g++ gcc gdb make cmake py3-pytest python3 valgrind \
   `# install clamav dependencies` \
-  libglib2.0-dev luajit5.1-dev icu-dev curl-dev ragel-dev \
-  libsqlite3-dev libmagic-dev hyperscan-dev \
+  glib-dev luajit-dev icu-dev curl-dev ragel-dev \
+  libsqlite3-dev libmagic hyperscan-dev \
   linux-headers openssl-dev pcre2-dev zlib-dev
 
 WORKDIR /rspamd
