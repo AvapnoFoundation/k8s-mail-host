@@ -20,10 +20,17 @@ RUN mkdir build; \
       -D CMAKE_INSTALL_LIBDIR=lib \
       -D APP_CONFIG_DIRECTORY=/etc/clamav \
       -D DATABASE_DIRECTORY=/var/lib/clamav \
-      -D ENABLE_JSON_SHARED=ON; \
+      -D ENABLE_CLAMONACC=OFF \
+      -D ENABLE_EXAMPLES=OFF \
+      -D ENABLE_JSON_SHARED=ON \
+      -D ENABLE_MAN_PAGES=OFF \
+      -D ENABLE_MILTER=ON \
+      -D ENABLE_STATIC_LIB=OFF; \
     cmake --build .; \
     ctest; \
     cmake --build . --target install -- DESTDIR="/clamav_temp"
+
+RUN rm -r "/clamav_temp/usr/include" "/clamav_temp/usr/lib/pkgconfig/"
 
 
 FROM alpine:3.14 as app
