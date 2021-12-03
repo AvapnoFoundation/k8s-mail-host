@@ -47,7 +47,6 @@ RUN apk add --no-cache \
         libxml2 \
         ncurses-libs \
         pcre2 \
-        tini \
         zlib
 
 COPY --from=builder /clamav_temp /

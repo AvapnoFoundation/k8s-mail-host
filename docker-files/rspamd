@@ -4,10 +4,10 @@ ARG version=3.1
 
 RUN apk update && apk add --no-cache \
   `# install tools` \
-  git g++ gcc gdb make cmake py3-pytest python3 valgrind \
+  git g++ gcc gdb make cmake py3-pytest python3 valgrind perl \
   `# install clamav dependencies` \
   glib-dev luajit-dev icu-dev curl-dev ragel sqlite-dev libmagic hyperscan-dev \
-  linux-headers openssl-dev pcre2-dev zlib-dev
+  linux-headers openssl-dev pcre2-dev zlib-dev libunwind-dev
 
 WORKDIR /rspamd
 
@@ -18,14 +18,24 @@ RUN mkdir build; \
     cmake .. \
         -D ENABLE_HYPERSCAN=ON \
         -D ENABLE_LUAJIT=ON \
+        -D ENABLE_LIBUNWIND=ON \
         -D CMAKE_BUILD_TYPE=RelWithDebuginfo; \
-    make; \
-    make install DESTDIR="/rspamd_temp"
+    cmake --build .; \
+    ctest; \
+    cmake --build . --target install -- DESTDIR="/rspamd_temp"
 
 RUN rm -r "/rspamd_temp/usr/include" "/rspamd_temp/usr/lib/pkgconfig/"
 
 
 FROM alpine:3.13 as app
+
+RUN apk add --no-cache \
+        fts \
+        libcurl \
+        libltdl \
+        libstdc++ \
+        pcre2 \
+        zlib
 
 COPY --from=builder /rspamd_temp /
 
