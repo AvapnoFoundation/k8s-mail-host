@@ -28,7 +28,7 @@ RUN mkdir build; \
 FROM alpine:3.13 as app
 
 RUN apk add --no-cache \
-        fts glib luajit icu curl sqlite hyperscan \
+        fts glib luajit icu curl ragel sqlite-libs libmagic hyperscan \
         linux-headers openssl zlib libunwind libsodium
 
 COPY --from=builder /rspamd_temp /
