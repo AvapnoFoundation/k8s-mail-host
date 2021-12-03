@@ -7,7 +7,7 @@ RUN apk update && apk add --no-cache \
   git g++ gcc gdb make cmake py3-pytest python3 valgrind perl \
   `# install clamav dependencies` \
   glib-dev luajit-dev icu-dev curl-dev ragel sqlite-dev libmagic hyperscan-dev \
-  linux-headers openssl-dev pcre2-dev zlib-dev libunwind-dev libsodium-dev
+  linux-headers openssl-dev zlib-dev libunwind-dev libsodium-dev
 
 WORKDIR /rspamd
 
@@ -28,7 +28,8 @@ RUN mkdir build; \
 FROM alpine:3.13 as app
 
 RUN apk add --no-cache \
-        fts glib-dev luajit-dev icu-dev curl sqlite ragel 
+        fts glib luajit icu curl sqlite hyperscan \
+        linux-headers openssl zlib libunwind libsodium
 
 COPY --from=builder /rspamd_temp /
 
