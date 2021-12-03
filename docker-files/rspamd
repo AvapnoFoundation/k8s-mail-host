@@ -24,8 +24,6 @@ RUN mkdir build; \
     ctest; \
     cmake --build . --target install -- DESTDIR="/rspamd_temp"
 
-RUN rm -r "/rspamd_temp/usr/include" "/rspamd_temp/usr/lib/pkgconfig/"
-
 
 FROM alpine:3.13 as app
 
