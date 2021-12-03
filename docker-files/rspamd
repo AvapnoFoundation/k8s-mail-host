@@ -28,12 +28,7 @@ RUN mkdir build; \
 FROM alpine:3.13 as app
 
 RUN apk add --no-cache \
-        fts \
-        libcurl \
-        libltdl \
-        libstdc++ \
-        pcre2 \
-        zlib
+        fts glib-dev luajit-dev icu-dev curl sqlite ragel 
 
 COPY --from=builder /rspamd_temp /
 
