@@ -26,6 +26,7 @@ RUN mkdir build; \
       -D ENABLE_MAN_PAGES=OFF \
       -D ENABLE_MILTER=ON \
       -D ENABLE_STATIC_LIB=OFF; \
+      -D CMAKE_BUILD_TYPE=RelWithDebuginfo; \
     cmake --build .; \
     ctest; \
     cmake --build . --target install -- DESTDIR="/clamav_temp"

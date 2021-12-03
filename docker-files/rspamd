@@ -19,9 +19,8 @@ RUN mkdir build; \
         -D ENABLE_HYPERSCAN=ON \
         -D ENABLE_LUAJIT=ON \
         -D CMAKE_BUILD_TYPE=RelWithDebuginfo; \
-    cmake --build .; \
-    ctest; \
-    cmake --build . --target install -- DESTDIR="/rspamd_temp"
+    make; \
+    make install DESTDIR="/rspamd_temp"
 
 RUN rm -r "/rspamd_temp/usr/include" "/rspamd_temp/usr/lib/pkgconfig/"
 
