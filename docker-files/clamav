@@ -51,6 +51,10 @@ RUN apk add --no-cache \
 
 COPY --from=builder /clamav_temp /
 
+RUN addgroup -S "clamav" && \
+    adduser -D -G "clamav" -h "/var/lib/clamav" -s "/bin/false" -S "clamav" && \
+    install -d -m 755 -g "clamav" -o "clamav" "/var/log/clamav"
+
 RUN apk update && apk add --no-cache tini
 
 ENTRYPOINT ["tini", "--", "/bin/sh", "-c"]
