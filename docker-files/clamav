@@ -2,7 +2,7 @@ FROM alpine:3.13 as builder
 
 ARG version=0.104.1
 
-RUN apk update && apk add \
+RUN apk update && apk add --no-cache \
   `# install tools` \
   git g++ gcc gdb make cmake py3-pytest python3 valgrind \
   `# install clamav dependencies` \
