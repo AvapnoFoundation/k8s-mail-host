@@ -16,8 +16,6 @@ RUN git clone --recursive --depth 1 --branch clamav-${version} https://github.co
 RUN mkdir build; \
     cd build; \
     cmake .. \
-      -D CMAKE_INSTALL_PREFIX=/usr \
-      -D CMAKE_INSTALL_LIBDIR=lib \
       -D APP_CONFIG_DIRECTORY=/etc/clamav \
       -D DATABASE_DIRECTORY=/var/lib/clamav \
       -D ENABLE_CLAMONACC=OFF \
@@ -25,7 +23,9 @@ RUN mkdir build; \
       -D ENABLE_JSON_SHARED=ON \
       -D ENABLE_MAN_PAGES=OFF \
       -D ENABLE_STATIC_LIB=OFF \
-      -D CMAKE_BUILD_TYPE=RelWithDebuginfo; \
+      -D CMAKE_BUILD_TYPE=RelWithDebuginfo \
+      -D CMAKE_INSTALL_PREFIX="" \
+      -D CMAKE_INSTALL_LIBDIR=lib; \
     cmake --build .; \
     ctest; \
     cmake --build . --target install -- DESTDIR="/clamav_temp"
