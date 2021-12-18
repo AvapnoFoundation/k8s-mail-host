@@ -22,6 +22,7 @@ RUN mkdir build; \
       -D ENABLE_EXAMPLES=OFF \
       -D ENABLE_JSON_SHARED=ON \
       -D ENABLE_MAN_PAGES=OFF \
+      -D ENABLE_MILTER=OFF \
       -D ENABLE_STATIC_LIB=OFF \
       -D CMAKE_BUILD_TYPE=RelWithDebuginfo \
       -D CMAKE_INSTALL_PREFIX="" \
@@ -30,7 +31,7 @@ RUN mkdir build; \
     ctest; \
     cmake --build . --target install -- DESTDIR="/clamav_temp"
 
-RUN rm -r "/clamav_temp/usr/include" "/clamav_temp/usr/lib/pkgconfig/"
+RUN rm -r "/clamav_temp/include" "/clamav_temp/lib/pkgconfig/"
 
 
 FROM alpine:3.13 as app
