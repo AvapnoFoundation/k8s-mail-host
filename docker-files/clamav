@@ -24,7 +24,7 @@ RUN mkdir build; \
       -D ENABLE_EXAMPLES=OFF \
       -D ENABLE_JSON_SHARED=ON \
       -D ENABLE_MAN_PAGES=OFF \
-      -D ENABLE_STATIC_LIB=OFF; \
+      -D ENABLE_STATIC_LIB=OFF \
       -D CMAKE_BUILD_TYPE=RelWithDebuginfo; \
     cmake --build .; \
     ctest; \

@@ -1,4 +1,4 @@
-name: rspamd Docker Image CI
+name: Rspamd Docker Image CI
 
 on: 
   push:
