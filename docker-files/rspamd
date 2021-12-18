@@ -5,7 +5,7 @@ ARG version=3.1
 RUN apk update && apk add --no-cache \
   `# install tools` \
   git g++ gcc gdb make cmake py3-pytest python3 valgrind perl \
-  `# install clamav dependencies` \
+  `# install rspamd dependencies` \
   glib-dev luajit-dev icu-dev curl-dev ragel sqlite-dev libmagic hyperscan-dev \
   linux-headers openssl-dev zlib-dev libunwind-dev libsodium-dev
 
@@ -19,7 +19,9 @@ RUN mkdir build; \
         -D ENABLE_HYPERSCAN=ON \
         -D ENABLE_LUAJIT=ON \
         -D ENABLE_LIBUNWIND=ON \
-        -D CMAKE_BUILD_TYPE=RelWithDebuginfo; \
+        -D INSTALL_WEBUI=OFF \
+        -D CMAKE_BUILD_TYPE=RelWithDebuginfo \
+        -D CMAKE_INSTALL_PREFIX=/; \
     cmake --build .; \
     ctest; \
     cmake --build . --target install -- DESTDIR="/rspamd_temp"

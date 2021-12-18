@@ -6,7 +6,7 @@ RUN apk update && apk add --no-cache \
   `# install tools` \
   git g++ gcc gdb make cmake py3-pytest python3 valgrind \
   `# install clamav dependencies` \
-  bzip2-dev check-dev curl-dev json-c-dev libmilter-dev libxml2-dev \
+  bzip2-dev check-dev curl-dev json-c-dev libxml2-dev \
   linux-headers ncurses-dev openssl-dev pcre2-dev zlib-dev
 
 WORKDIR /clamav
@@ -24,7 +24,6 @@ RUN mkdir build; \
       -D ENABLE_EXAMPLES=OFF \
       -D ENABLE_JSON_SHARED=ON \
       -D ENABLE_MAN_PAGES=OFF \
-      -D ENABLE_MILTER=ON \
       -D ENABLE_STATIC_LIB=OFF; \
       -D CMAKE_BUILD_TYPE=RelWithDebuginfo; \
     cmake --build .; \
@@ -42,7 +41,6 @@ RUN apk add --no-cache \
         libbz2 \
         libcurl \
         libltdl \
-        libmilter \
         libstdc++ \
         libxml2 \
         ncurses-libs \

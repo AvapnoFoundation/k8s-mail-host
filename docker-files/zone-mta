@@ -21,4 +21,3 @@ WORKDIR /zone-mta
 COPY --from=builder /zone-mta /zone-mta
 
 ENTRYPOINT ["tini", "--", "node", "app.js"]
-CMD ["--config=config/zonemta.toml"]
