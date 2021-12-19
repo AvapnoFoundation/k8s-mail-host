@@ -1,0 +1,28 @@
+FROM alpine:3.13 as builder
+
+ARG version=3.06b
+
+RUN apk update && apk add --no-cache \
+  `# install tools` \
+  git build-essential \
+  `# install p0f dependencies` \
+  libpcap-dev
+
+WORKDIR /p0f
+
+RUN git clone --recursive --depth 1 --branch v${version} https://github.com/p0f/p0f.git ./
+
+RUN make all
+
+
+FROM alpine:3.13 as app
+
+#RUN apk add --no-cache libpcap
+
+WORKDIR /p0f
+
+COPY --from=builder /p0f/p0f /p0f/p0f
+
+RUN apk update && apk add --no-cache tini
+
+ENTRYPOINT ["tini", "--", "p0f"]
