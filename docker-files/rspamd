@@ -37,4 +37,4 @@ COPY --from=builder /rspamd_temp /
 
 RUN apk update && apk add --no-cache tini
 
-ENTRYPOINT ["tini", "--", "rspamd", "-i", "-f"]
+ENTRYPOINT ["tini", "--", "rspamd"]

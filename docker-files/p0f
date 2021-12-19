@@ -12,7 +12,7 @@ WORKDIR /p0f
 
 RUN git clone --recursive --depth 1 --branch v${version} https://github.com/p0f/p0f.git ./
 
-RUN make all
+RUN ./build.sh
 
 
 FROM alpine:3.13 as app
@@ -21,7 +21,9 @@ FROM alpine:3.13 as app
 
 WORKDIR /p0f
 
-COPY --from=builder /p0f/p0f /p0f/p0f
+RUN mkdir -p /etc/p0f
+COPY --from=builder /p0f/p0f.fp /etc/p0f/p0f.fp
+COPY --from=builder /p0f/p0f /usr/local/sbin
 
 RUN apk update && apk add --no-cache tini
 
