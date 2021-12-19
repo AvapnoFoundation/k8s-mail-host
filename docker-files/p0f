@@ -4,7 +4,7 @@ ARG version=3.06b
 
 RUN apk update && apk add --no-cache \
   `# install tools` \
-  git make gcc \
+  bash git make gcc \
   `# install p0f dependencies` \
   libpcap-dev
 
@@ -12,9 +12,7 @@ WORKDIR /p0f
 
 RUN git clone --recursive --depth 1 --branch v${version} https://github.com/p0f/p0f.git ./
 
-RUN ls
-
-RUN ./build.sh
+RUN make all
 
 
 FROM alpine:3.13 as app
