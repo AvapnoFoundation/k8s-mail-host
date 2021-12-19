@@ -8,7 +8,9 @@ WORKDIR /haraka
 
 RUN git clone --recursive --depth 1 --branch v${version} https://github.com/AvapnoHelpingHand/Haraka.git ./
 RUN npm install --production
-
+RUN npm install toobusy-js
+RUN npm install haraka-plugin-wildduck
+RUN npm install haraka-plugin-asn
 
 FROM node:12-alpine3.14 as app
 
@@ -17,6 +19,7 @@ ENV NODE_ENV production
 RUN apk add --no-cache tini
 
 WORKDIR /haraka
+
 COPY --from=builder /haraka /haraka
 
 ENTRYPOINT ["tini", "--", "node", "haraka.js"]
