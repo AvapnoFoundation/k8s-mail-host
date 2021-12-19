@@ -4,7 +4,7 @@ ARG version=3.06b
 
 RUN apk update && apk add --no-cache \
   `# install tools` \
-  git build-essential \
+  git make gcc \
   `# install p0f dependencies` \
   libpcap-dev
 
