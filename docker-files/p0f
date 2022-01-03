@@ -23,7 +23,7 @@ WORKDIR /p0f
 
 RUN mkdir -p /etc/p0f
 COPY --from=builder /p0f/p0f.fp /etc/p0f/p0f.fp
-COPY --from=builder /p0f/p0f /usr/local/sbin
+COPY --from=builder /p0f/p0f /usr/sbin
 
 RUN apk update && apk add --no-cache tini
 
