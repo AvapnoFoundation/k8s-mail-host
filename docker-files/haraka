@@ -11,6 +11,7 @@ RUN npm install --production
 RUN npm install toobusy-js
 RUN npm install haraka-plugin-wildduck
 RUN npm install haraka-plugin-asn
+RUN npm install haraka-plugin-vmta
 
 FROM node:12-alpine3.14 as app
 
