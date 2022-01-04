@@ -17,7 +17,7 @@ RUN make all
 
 FROM alpine:3.13 as app
 
-#RUN apk add --no-cache libpcap
+RUN apk add --no-cache libpcap
 
 WORKDIR /p0f
 
