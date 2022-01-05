@@ -26,4 +26,4 @@ COPY --from=builder /p0f/p0f /p0f
 
 RUN apk update && apk add --no-cache tini
 
-ENTRYPOINT ["tini", "--", "p0f"]
+ENTRYPOINT ["tini", "--", "/p0f/p0f"]
