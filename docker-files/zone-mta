@@ -15,6 +15,8 @@ FROM node:12-alpine3.14 as app
 
 ENV NODE_ENV production
 
+RUN npm install zonemta-limiter zonemta-wildduck zonemta-loop-breaker
+
 RUN apk add --no-cache tini
 
 WORKDIR /zone-mta
