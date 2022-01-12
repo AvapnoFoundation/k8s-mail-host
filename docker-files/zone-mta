@@ -7,15 +7,13 @@ RUN apk add --no-cache git python3 make g++
 WORKDIR /zone-mta
 
 RUN git clone --recursive --depth 1 --branch master https://github.com/AvapnoHelpingHand/zone-mta ./
-
 RUN npm install --production
+RUN npm install zonemta-limiter zonemta-wildduck zonemta-loop-breaker
 
 
 FROM node:12-alpine3.14 as app
 
 ENV NODE_ENV production
-
-RUN npm install zonemta-limiter zonemta-wildduck zonemta-loop-breaker
 
 RUN apk add --no-cache tini
 
