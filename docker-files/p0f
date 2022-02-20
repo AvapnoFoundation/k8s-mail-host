@@ -10,7 +10,7 @@ RUN apk update && apk add --no-cache \
 
 WORKDIR /p0f
 
-RUN git clone --recursive --depth 1 --branch v${version} https://github.com/p0f/p0f.git ./
+RUN git clone --recursive --depth 1 --branch v${version} https://github.com/AvapnoHelpingHand/p0f.git ./
 
 RUN make all
 

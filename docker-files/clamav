@@ -11,7 +11,7 @@ RUN apk update && apk add --no-cache \
 
 WORKDIR /clamav
 
-RUN git clone --recursive --depth 1 --branch clamav-${version} https://github.com/Cisco-Talos/clamav.git ./
+RUN git clone --recursive --depth 1 --branch clamav-${version} https://github.com/AvapnoHelpingHand/clamav.git ./
 
 RUN mkdir build; \
     cd build; \
