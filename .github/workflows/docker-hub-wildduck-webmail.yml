@@ -13,6 +13,9 @@ on:
       - 'docker-files/wildduck-webmail'
   workflow_dispatch:
 
+env:
+  VERSION: master
+
 jobs:
   docker:
     runs-on: ubuntu-latest
@@ -32,4 +35,5 @@ jobs:
         with:
           push: true
           file: docker-files/wildduck-webmail
-          tags: ahhf/wildduck-webmail:k8s-mail-host
+          tags: ahhf/wildduck-webmail:$VERSION
+          build-args: version=$VERSION

@@ -1,6 +1,6 @@
 FROM node:12-alpine3.14 as builder
 
-ARG version=2.8.28
+ARG version
 
 RUN apk add --no-cache git python2 make g++
 

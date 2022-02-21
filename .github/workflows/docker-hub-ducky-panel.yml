@@ -13,6 +13,9 @@ on:
       - 'docker-files/ducky-panel'
   workflow_dispatch:
 
+env:
+  VERSION: master
+
 jobs:
   docker:
     runs-on: ubuntu-latest
@@ -32,4 +35,5 @@ jobs:
         with:
           push: true
           file: docker-files/ducky-panel
-          tags: ahhf/ducky-panel:k8s-mail-host
+          tags: ahhf/ducky-panel:$VERSION
+          build-args: version=$VERSION

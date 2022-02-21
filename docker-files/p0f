@@ -1,6 +1,6 @@
 FROM alpine:3.13 as builder
 
-ARG version=3.06b
+ARG version
 
 RUN apk update && apk add --no-cache \
   `# install tools` \
