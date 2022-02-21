@@ -11,7 +11,7 @@ RUN apk update && apk add --no-cache \
 
 WORKDIR /rspamd
 
-RUN git clone --recursive --depth 1 --branch ${version} https://github.com/AvapnoHelpingHand/rspamd.git ./
+RUN git clone --recursive --depth 1 --branch ${version} https://github.com/rspamd/rspamd.git ./
 
 RUN mkdir build; \
     cd build; \
