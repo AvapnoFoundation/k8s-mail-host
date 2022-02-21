@@ -6,11 +6,13 @@ on:
       - 'main'
     paths:
       - 'docker-files/p0f'
+      - '.github/workflows/docker-hub-p0f.yml'
   pull_request:
     branches:
       - 'main'
     paths:
       - 'docker-files/p0f'
+      - '.github/workflows/docker-hub-p0f.yml'
   workflow_dispatch:
 
 env:

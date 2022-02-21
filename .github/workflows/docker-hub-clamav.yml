@@ -6,11 +6,13 @@ on:
       - 'main'
     paths:
       - 'docker-files/clamav'
+      - '.github/workflows/docker-hub-clamav.yml'
   pull_request:
     branches:
       - 'main'
     paths:
       - 'docker-files/clamav'
+      - '.github/workflows/docker-hub-clamav.yml'
   workflow_dispatch:
 
 env:

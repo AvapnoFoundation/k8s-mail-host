@@ -6,11 +6,13 @@ on:
       - 'main'
     paths:
       - 'docker-files/wildduck-webmail'
+      - '.github/workflows/docker-hub-wildduck-webmail.yml'
   pull_request:
     branches:
       - 'main'
     paths:
       - 'docker-files/wildduck-webmail'
+      - '.github/workflows/docker-hub-wildduck-webmail.yml'
   workflow_dispatch:
 
 env:

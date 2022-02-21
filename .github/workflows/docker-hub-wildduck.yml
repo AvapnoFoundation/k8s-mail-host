@@ -6,11 +6,13 @@ on:
       - 'main'
     paths:
       - 'docker-files/wildduck'
+      - '.github/workflows/docker-hub-wildduck.yml'
   pull_request:
     branches:
       - 'main'
     paths:
       - 'docker-files/wildduck'
+      - '.github/workflows/docker-hub-wildduck.yml'
   workflow_dispatch:
 
 env:
