@@ -35,5 +35,5 @@ jobs:
         with:
           push: true
           file: docker-files/ducky-panel
-          tags: ahhf/ducky-panel:$VERSION
-          build-args: version=$VERSION
+          tags: ahhf/ducky-panel:${{ env.VERSION }}
+          build-args: version=${{ env.VERSION }}

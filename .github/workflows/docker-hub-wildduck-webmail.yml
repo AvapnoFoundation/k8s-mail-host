@@ -35,5 +35,5 @@ jobs:
         with:
           push: true
           file: docker-files/wildduck-webmail
-          tags: ahhf/wildduck-webmail:$VERSION
-          build-args: version=$VERSION
+          tags: ahhf/wildduck-webmail:${{ env.VERSION }}
+          build-args: version=${{ env.VERSION }}

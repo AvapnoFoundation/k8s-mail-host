@@ -35,5 +35,5 @@ jobs:
         with:
           push: true
           file: docker-files/wildduck
-          tags: ahhf/wildduck:$VERSION
-          build-args: version=$VERSION
+          tags: ahhf/wildduck:${{ env.VERSION }}
+          build-args: version=${{ env.VERSION }}

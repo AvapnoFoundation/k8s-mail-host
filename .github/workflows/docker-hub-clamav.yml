@@ -36,5 +36,5 @@ jobs:
         with:
           push: true
           file: docker-files/clamav
-          tags: ahhf/clamav:$VERSION
-          build-args: version=$VERSION
+          tags: ahhf/clamav:${{ env.VERSION }}
+          build-args: version=${{ env.VERSION }}

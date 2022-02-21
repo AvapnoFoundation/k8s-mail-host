@@ -35,5 +35,5 @@ jobs:
         with:
           push: true
           file: docker-files/p0f
-          tags: ahhf/p0f:$VERSION
-          build-args: version=$VERSION
+          tags: ahhf/p0f:${{ env.VERSION }}
+          build-args: version=${{ env.VERSION }}
