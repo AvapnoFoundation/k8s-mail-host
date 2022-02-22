@@ -15,6 +15,9 @@ RUN npm uninstall bower
 
 FROM node:12-alpine3.14 as app
 
+RUN addgroup -S k8s-mail-host && adduser -S k8s-mail-host -G k8s-mail-host
+USER k8s-mail-host
+
 ENV NODE_ENV production
 
 RUN apk add --no-cache tini
