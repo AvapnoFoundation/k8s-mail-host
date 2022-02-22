@@ -19,7 +19,9 @@ RUN mkdir build; \
         -D ENABLE_HYPERSCAN=ON \
         -D ENABLE_LUAJIT=ON \
         -D ENABLE_LIBUNWIND=ON \
+        -D ENABLE_HIREDIS=ON \
         -D INSTALL_WEBUI=ON \
+        -D ENABLE_OPTIMIZATION=ON \
         -D CMAKE_BUILD_TYPE=RelWithDebuginfo \
         -D CMAKE_INSTALL_PREFIX=""; \
     cmake --build .; \
