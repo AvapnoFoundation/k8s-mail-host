@@ -13,14 +13,14 @@ RUN npm install zonemta-limiter zonemta-wildduck zonemta-loop-breaker
 
 FROM node:12-alpine3.14 as app
 
-RUN addgroup -S k8s-mail-host && adduser -S k8s-mail-host -G k8s-mail-host
-USER k8s-mail-host
-
 ENV NODE_ENV production
 
 RUN apk add --no-cache tini
 
 WORKDIR /zone-mta
 COPY --from=builder /zone-mta /zone-mta
+
+RUN addgroup -S k8s-mail-host && adduser -S k8s-mail-host -G k8s-mail-host
+USER k8s-mail-host
 
 ENTRYPOINT ["tini", "--", "node", "app.js"]

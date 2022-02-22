@@ -36,9 +36,6 @@ RUN rm -r "/clamav_temp/include" "/clamav_temp/lib/pkgconfig/"
 
 FROM alpine:3.13 as app
 
-RUN addgroup -S k8s-mail-host && adduser -S k8s-mail-host -G k8s-mail-host
-USER k8s-mail-host
-
 RUN apk add --no-cache \
         fts \
         json-c \
@@ -58,5 +55,8 @@ RUN addgroup -S "clamav" && \
     install -d -m 755 -g "clamav" -o "clamav" "/var/log/clamav"
 
 RUN apk update && apk add --no-cache tini
+
+RUN addgroup -S k8s-mail-host && adduser -S k8s-mail-host -G k8s-mail-host
+USER k8s-mail-host
 
 ENTRYPOINT ["tini", "--"]

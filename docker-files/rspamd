@@ -31,9 +31,6 @@ RUN mkdir build; \
 
 FROM alpine:3.13 as app
 
-RUN addgroup -S k8s-mail-host && adduser -S k8s-mail-host -G k8s-mail-host
-USER k8s-mail-host
-
 RUN apk add --no-cache \
         fts glib luajit icu curl ragel sqlite-libs libmagic hyperscan \
         linux-headers openssl zlib libunwind libsodium
@@ -41,5 +38,8 @@ RUN apk add --no-cache \
 COPY --from=builder /rspamd_temp /
 
 RUN apk update && apk add --no-cache tini
+
+RUN addgroup -S k8s-mail-host && adduser -S k8s-mail-host -G k8s-mail-host
+USER k8s-mail-host
 
 ENTRYPOINT ["tini", "--", "rspamd"]
